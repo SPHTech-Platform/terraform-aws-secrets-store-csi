@@ -10,7 +10,7 @@ locals {
     resources_liveness  = jsonencode(var.resources_liveness)
 
     syncSecretEnabled    = var.syncSecretEnabled
-    enableSecretRotation = var.syncSecretEnabled
+    enableSecretRotation = var.enableSecretRotation
 
   }
 
