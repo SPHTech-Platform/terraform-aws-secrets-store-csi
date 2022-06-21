@@ -9,9 +9,8 @@ locals {
     resources_registrar = jsonencode(var.resources_registrar)
     resources_liveness  = jsonencode(var.resources_liveness)
 
-    syncSecretEnabled   = var.syncSecretEnabled
+    syncSecretEnabled    = var.syncSecretEnabled
     enableSecretRotation = var.syncSecretEnabled
-
 
   }
 
