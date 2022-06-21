@@ -9,6 +9,9 @@ locals {
     resources_registrar = jsonencode(var.resources_registrar)
     resources_liveness  = jsonencode(var.resources_liveness)
 
+    syncSecretEnabled    = var.syncSecretEnabled
+    enableSecretRotation = var.enableSecretRotation
+
   }
 
   manifest_split = [for data in split("---", data.http.ascp_manifest.body) : yamldecode(data)]

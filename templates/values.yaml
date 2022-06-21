@@ -95,10 +95,10 @@ rbac:
 
 ## Install RBAC roles and bindings required for K8S Secrets syncing if true
 syncSecret:
-  enabled: false
+  enabled: ${syncSecretEnabled}
 
 ## Enable secret rotation feature [alpha]
-enableSecretRotation: false
+enableSecretRotation: ${enableSecretRotation}
 
 ## Secret rotation poll interval duration
 rotationPollInterval:

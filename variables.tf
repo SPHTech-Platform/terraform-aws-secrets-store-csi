@@ -112,6 +112,18 @@ variable "resources_liveness" {
   }
 }
 
+variable "syncSecretEnabled" {
+  description = "Sync with kubernetes secrets"
+  type        = bool
+  default     = false
+}
+
+variable "enableSecretRotation" {
+  description = "Enable rotation for secrets"
+  type        = bool
+  default     = false
+}
+
 ###########
 ## ASCP ###
 ###########
