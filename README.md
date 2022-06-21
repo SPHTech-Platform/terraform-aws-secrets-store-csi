@@ -48,6 +48,7 @@
 | <a name="input_chart_version"></a> [chart\_version](#input\_chart\_version) | Version of Chart to install. Set to empty to install the latest version | `string` | `"1.1.2"` | no |
 | <a name="input_cluster_name"></a> [cluster\_name](#input\_cluster\_name) | Name of Kubernetes Cluster | `string` | n/a | yes |
 | <a name="input_create_default_irsa"></a> [create\_default\_irsa](#input\_create\_default\_irsa) | Create default IRSA for service account | `bool` | `true` | no |
+| <a name="input_enableSecretRotation"></a> [enableSecretRotation](#input\_enableSecretRotation) | Enable rotation for secrets | `bool` | `false` | no |
 | <a name="input_external_secrets_secrets_manager_arns"></a> [external\_secrets\_secrets\_manager\_arns](#input\_external\_secrets\_secrets\_manager\_arns) | List of Secrets Manager ARNs that contain secrets to mount using External Secrets | `list(string)` | <pre>[<br>  "arn:aws:secretsmanager:*:*:secret:*"<br>]</pre> | no |
 | <a name="input_external_secrets_ssm_parameter_arns"></a> [external\_secrets\_ssm\_parameter\_arns](#input\_external\_secrets\_ssm\_parameter\_arns) | List of Systems Manager Parameter ARNs that contain secrets to mount using External Secrets | `list(string)` | <pre>[<br>  "arn:aws:ssm:*:*:parameter/*"<br>]</pre> | no |
 | <a name="input_iam_role_description"></a> [iam\_role\_description](#input\_iam\_role\_description) | Description for IAM role for controller | `string` | `"Used by AWS Load Balancer Controller for EKS"` | no |
@@ -67,6 +68,7 @@
 | <a name="input_resources_liveness"></a> [resources\_liveness](#input\_resources\_liveness) | LivenessProbe Resources | `map(any)` | <pre>{<br>  "limits": {<br>    "cpu": "100m",<br>    "memory": "100Mi"<br>  },<br>  "requests": {<br>    "cpu": "100m",<br>    "memory": "100Mi"<br>  }<br>}</pre> | no |
 | <a name="input_resources_registrar"></a> [resources\_registrar](#input\_resources\_registrar) | Registrar Resources | `map(any)` | <pre>{<br>  "limits": {<br>    "cpu": "100m",<br>    "memory": "100Mi"<br>  },<br>  "requests": {<br>    "cpu": "100m",<br>    "memory": "100Mi"<br>  }<br>}</pre> | no |
 | <a name="input_service_account_name"></a> [service\_account\_name](#input\_service\_account\_name) | Name of service account to create. Not generated | `string` | `"csi-secrets-store-provider-aws"` | no |
+| <a name="input_syncSecretEnabled"></a> [syncSecretEnabled](#input\_syncSecretEnabled) | Sync with kubernetes secrets | `bool` | `false` | no |
 
 ## Outputs
 
