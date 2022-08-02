@@ -3,12 +3,15 @@ variable "cluster_name" {
   type        = string
 }
 
-variable "region" {
-  description = "The AWS region for the kubernetes cluster. Set to use KIAM or kube2iam for example."
-  type        = string
-  default     = ""
+variable "max_history" {
+  description = "Max History for Helm"
+  type        = number
+  default     = 20
 }
 
+#########################################
+# Secrets Store CSI Driver Chart Values
+#########################################
 variable "release_name" {
   description = "Helm release name"
   type        = string
@@ -30,7 +33,7 @@ variable "chart_repository" {
 variable "chart_version" {
   description = "Version of Chart to install. Set to empty to install the latest version"
   type        = string
-  default     = "1.1.2"
+  default     = "1.2.2"
 }
 
 variable "chart_namespace" {
@@ -45,26 +48,22 @@ variable "chart_timeout" {
   default     = 300
 }
 
-variable "max_history" {
-  description = "Max History for Helm"
-  type        = number
-  default     = 20
-}
-
-########################
-# Chart Values
-########################
-
 variable "image_repository" {
-  description = "Image repository on Dockerhub"
+  description = "Image repository for the Driver"
   type        = string
   default     = "k8s.gcr.io/csi-secrets-store/driver"
 }
 
-variable "image_tag" {
-  description = "Image tag"
+variable "image_repository_crds" {
+  description = "Image repository for the CRDs"
   type        = string
-  default     = "v1.1.2"
+  default     = "k8s.gcr.io/csi-secrets-store/driver-crds"
+}
+
+variable "image_tag" {
+  description = "Image tag for the Driver and CRDs"
+  type        = string
+  default     = "v1.2.2"
 }
 
 variable "resources_driver" {
@@ -82,6 +81,18 @@ variable "resources_driver" {
   }
 }
 
+variable "image_repository_registrar" {
+  description = "Image repository for the Registrar"
+  type        = string
+  default     = "k8s.gcr.io/sig-storage/csi-node-driver-registrar"
+}
+
+variable "image_tag_registrar" {
+  description = "Image tag"
+  type        = string
+  default     = "v2.5.1"
+}
+
 variable "resources_registrar" {
   description = "Registrar Resources"
   type        = map(any)
@@ -97,8 +108,20 @@ variable "resources_registrar" {
   }
 }
 
+variable "image_repository_liveness" {
+  description = "Image repository for the Liveness Probe"
+  type        = string
+  default     = "k8s.gcr.io/sig-storage/livenessprobe"
+}
+
+variable "image_tag_liveness" {
+  description = "Image tag fo the LivenessProbe"
+  type        = string
+  default     = "v2.7.0"
+}
+
 variable "resources_liveness" {
-  description = "LivenessProbe Resources"
+  description = "Liveness Probe Resources"
   type        = map(any)
   default = {
     requests = {
@@ -110,6 +133,55 @@ variable "resources_liveness" {
       memory = "100Mi"
     }
   }
+}
+
+variable "affinity" {
+  description = "Affinity for Secrets Store CSI Driver pods. Prevents the CSI driver from being scheduled on virtual-kubelet nodes by default"
+  type        = map(any)
+
+  default = {
+    nodeAffinity = {
+      requiredDuringSchedulingIgnoredDuringExecution = {
+        nodeSelectorTerms = [
+          {
+            matchExpressions = [
+              {
+                key      = "type"
+                operator = "NotIn"
+                values = [
+                  "virtual-kubelet"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}
+
+variable "node_selector" {
+  description = "Node selector for Secrets Store CSI Driver pods"
+  type        = map(any)
+  default     = {}
+}
+
+variable "tolerations" {
+  description = "Tolerations for Secrets Store CSI Driver pods"
+  type        = list(map(string))
+  default     = []
+}
+
+variable "pod_labels" {
+  description = "Labels for Secrets Store CSI Driver pods"
+  type        = map(any)
+  default     = {}
+}
+
+variable "pod_annotations" {
+  description = "Annotations for Secrets Store CSI Driver pods"
+  type        = map(any)
+  default     = {}
 }
 
 variable "syncSecretEnabled" {
@@ -124,14 +196,106 @@ variable "enableSecretRotation" {
   default     = false
 }
 
-###########
-## ASCP ###
-###########
-
-variable "ascp_manifest_url" {
-  description = "ASCP YAML file in the GitHub repo deployment directory"
+###########################
+## ASCP Helm Chart Values
+###########################
+variable "ascp_release_name" {
+  description = "ASCP helm release name"
   type        = string
-  default     = "https://raw.githubusercontent.com/aws/secrets-store-csi-driver-provider-aws/main/deployment/aws-provider-installer.yaml"
+  default     = "csi-secrets-store-provider-aws"
+}
+
+variable "ascp_chart_name" {
+  description = "Name of ASCP chart"
+  type        = string
+  default     = "csi-secrets-store-provider-aws"
+}
+
+variable "ascp_chart_repository" {
+  description = "Helm repository for the ASCP chart"
+  type        = string
+  default     = "https://aws.github.io/eks-charts"
+}
+
+variable "ascp_chart_version" {
+  description = "Version of ASCP chart to install. Set to empty to install the latest version"
+  type        = string
+  default     = "0.0.3"
+}
+
+variable "ascp_chart_namespace" {
+  description = "Namespace to install the ASCP chart into"
+  type        = string
+  default     = "kube-system"
+}
+
+variable "ascp_chart_timeout" {
+  description = "Timeout to wait for the ASCP chart to be deployed."
+  type        = number
+  default     = 300
+}
+
+variable "ascp_image_registry" {
+  description = "Image registry of the ASCP"
+  type        = string
+  default     = "public.ecr.aws"
+}
+
+variable "ascp_image_repository" {
+  description = "Image repository of the ASCP"
+  type        = string
+  default     = "aws-secrets-manager/secrets-store-csi-driver-provider-aws"
+}
+
+variable "ascp_image_tag" {
+  description = "Image tag of the ASCP"
+  type        = string
+  default     = "1.0.r2-6-gee95299-2022.04.14.21.07"
+}
+
+variable "ascp_node_selector" {
+  description = "Node selector for ASCP pods"
+  type        = map(any)
+  default     = {}
+}
+
+variable "ascp_tolerations" {
+  description = "Tolerations for ASCP pods"
+  type        = list(map(string))
+  default     = []
+}
+
+variable "ascp_resources" {
+  description = "ASCP container rsources"
+  type        = map(any)
+  default = {
+    requests = {
+      cpu    = "50m"
+      memory = "100Mi"
+    }
+    limits = {
+      cpu    = "50m"
+      memory = "100Mi"
+    }
+  }
+}
+
+variable "ascp_pod_labels" {
+  description = "Labels for ASCP pods"
+  type        = map(any)
+  default     = {}
+}
+
+variable "ascp_pod_annotations" {
+  description = "Annotations for ASCP pods"
+  type        = map(any)
+  default     = {}
+}
+
+variable "ascp_priority_class_name" {
+  description = "Priority class name for ASCP pods"
+  type        = string
+  default     = ""
 }
 
 ########################
