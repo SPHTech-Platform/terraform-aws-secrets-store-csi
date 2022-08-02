@@ -24,7 +24,21 @@ locals {
     enableSecretRotation = var.enableSecretRotation
   }
 
-  ascp_values = {}
+  ascp_values = {
+    image_registry   = var.ascp_image_registry
+    image_repository = var.ascp_image_repository
+    image_tag        = var.ascp_image_tag
+
+    node_selector = jsonencode(var.ascp_node_selector)
+    tolerations   = jsonencode(var.ascp_tolerations)
+    resources     = jsonencode(var.ascp_resources)
+
+    pod_labels      = jsonencode(var.ascp_pod_labels)
+    pod_annotations = jsonencode(var.ascp_pod_annotations)
+
+    service_account_name = local.service_account_name
+    priority_class_name  = var.ascp_priority_class_name
+  }
 }
 
 resource "helm_release" "release" {

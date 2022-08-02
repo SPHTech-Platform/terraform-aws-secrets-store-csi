@@ -1,29 +1,19 @@
 imagePullSecrets: []
 
 image:
-  registry: public.ecr.aws
-  repository: aws-secrets-manager/secrets-store-csi-driver-provider-aws
+  registry: ${image_registry}
+  repository: ${image_repository}
   ## defaults to app.Version
-  tag:
+  tag: ${image_tag}
   pullPolicy: IfNotPresent
 
-nodeSelector: {}
-tolerations: []
+nodeSelector: ${node_selector}
+tolerations: ${tolerations}
 
-port: 8989
+resources: ${resources}
 
-privileged: false
-
-resources:
-  requests:
-    cpu: 50m
-    memory: 100Mi
-  limits:
-    cpu: 50m
-    memory: 100Mi
-
-podLabels: {}
-podAnnotations: {}
+podLabels: ${pod_labels}
+podAnnotations: ${pod_annotations}
 
 updateStrategy:
   type: RollingUpdate
@@ -36,6 +26,6 @@ rbac:
   install: true
   pspEnabled: false
   serviceAccount:
-    name:
+    name: ${service_account_name}
 
-priorityClassName: ""
+priorityClassName: "${priority_class_name}"

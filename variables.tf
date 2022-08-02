@@ -223,6 +223,69 @@ variable "ascp_chart_timeout" {
   default     = 300
 }
 
+variable "ascp_image_registry" {
+  description = "Image registry of the ASCP"
+  type        = string
+  default     = "public.ecr.aws"
+}
+
+variable "ascp_image_repository" {
+  description = "Image repository of the ASCP"
+  type        = string
+  default     = "aws-secrets-manager/secrets-store-csi-driver-provider-aws"
+}
+
+variable "ascp_image_tag" {
+  description = "Image tag of the ASCP"
+  type        = string
+  default     = "1.0.r2-6-gee95299-2022.04.14.21.07"
+}
+
+variable "ascp_node_selector" {
+  description = "Node selector for ASCP pods"
+  type        = map(any)
+  default     = {}
+}
+
+variable "ascp_tolerations" {
+  description = "Tolerations for ASCP pods"
+  type        = list(map(string))
+  default     = []
+}
+
+variable "ascp_resources" {
+  description = "ASCP container rsources"
+  type        = map(any)
+  default = {
+    requests = {
+      cpu    = "50m"
+      memory = "100Mi"
+    }
+    limits = {
+      cpu    = "50m"
+      memory = "100Mi"
+    }
+  }
+}
+
+variable "ascp_pod_labels" {
+  description = "Labels for ASCP pods"
+  type        = map(any)
+  default     = {}
+}
+
+variable "ascp_pod_annotations" {
+  description = "Annotations for ASCP pods"
+  type        = map(any)
+  default     = {}
+}
+
+variable "ascp_priority_class_name" {
+  description = "Priority class name for ASCP pods"
+  type        = string
+  default     = ""
+}
+
 ########################
 # IAM Role
 ########################
