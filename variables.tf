@@ -3,6 +3,15 @@ variable "cluster_name" {
   type        = string
 }
 
+variable "max_history" {
+  description = "Max History for Helm"
+  type        = number
+  default     = 20
+}
+
+#########################################
+# Secrets Store CSI Driver Chart Values
+#########################################
 variable "release_name" {
   description = "Helm release name"
   type        = string
@@ -38,16 +47,6 @@ variable "chart_timeout" {
   type        = number
   default     = 300
 }
-
-variable "max_history" {
-  description = "Max History for Helm"
-  type        = number
-  default     = 20
-}
-
-########################
-# Chart Values
-########################
 
 variable "image_repository" {
   description = "Image repository for the Driver"
@@ -91,7 +90,7 @@ variable "image_repository_registrar" {
 variable "image_tag_registrar" {
   description = "Image tag"
   type        = string
-  default     = "v2.5.0"
+  default     = "v2.5.1"
 }
 
 variable "resources_registrar" {
@@ -118,7 +117,7 @@ variable "image_repository_liveness" {
 variable "image_tag_liveness" {
   description = "Image tag fo the LivenessProbe"
   type        = string
-  default     = "v2.6.0"
+  default     = "v2.7.0"
 }
 
 variable "resources_liveness" {
@@ -185,14 +184,43 @@ variable "enableSecretRotation" {
   default     = false
 }
 
-###########
-## ASCP ###
-###########
-
-variable "ascp_manifest_url" {
-  description = "ASCP YAML file in the GitHub repo deployment directory"
+###########################
+## ASCP Helm Chart Values
+###########################
+variable "ascp_release_name" {
+  description = "ASCP helm release name"
   type        = string
-  default     = "https://raw.githubusercontent.com/aws/secrets-store-csi-driver-provider-aws/main/deployment/aws-provider-installer.yaml"
+  default     = "csi-secrets-store-provider-aws"
+}
+
+variable "ascp_chart_name" {
+  description = "Name of ASCP chart"
+  type        = string
+  default     = "csi-secrets-store-provider-aws"
+}
+
+variable "ascp_chart_repository" {
+  description = "Helm repository for the ASCP chart"
+  type        = string
+  default     = "https://aws.github.io/eks-charts"
+}
+
+variable "ascp_chart_version" {
+  description = "Version of ASCP chart to install. Set to empty to install the latest version"
+  type        = string
+  default     = "0.0.3"
+}
+
+variable "ascp_chart_namespace" {
+  description = "Namespace to install the ASCP chart into"
+  type        = string
+  default     = "kube-system"
+}
+
+variable "ascp_chart_timeout" {
+  description = "Timeout to wait for the ASCP chart to be deployed."
+  type        = number
+  default     = 300
 }
 
 ########################
