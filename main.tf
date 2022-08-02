@@ -1,7 +1,7 @@
 locals {
   service_account_name = var.service_account_name
 
-  values = {
+  secrets_store_csi_values = {
     image_repository = var.image_repository
     image_tag        = var.image_tag
 
@@ -9,12 +9,13 @@ locals {
     resources_registrar = jsonencode(var.resources_registrar)
     resources_liveness  = jsonencode(var.resources_liveness)
 
+    affinity      = jsonencode(var.affinity)
+    node_selector = jsonencode(var.node_selector)
+    tolerations   = jsonencode(var.tolerations)
+
     syncSecretEnabled    = var.syncSecretEnabled
     enableSecretRotation = var.enableSecretRotation
-
   }
-
-  manifest_split = [for data in split("---", data.http.ascp_manifest.body) : yamldecode(data)]
 }
 
 resource "helm_release" "release" {
@@ -28,11 +29,21 @@ resource "helm_release" "release" {
   timeout     = var.chart_timeout
 
   values = [
-    templatefile("${path.module}/templates/values.yaml", local.values),
+    templatefile("${path.module}/templates/secrets_store_csi.yaml", local.secrets_store_csi_values),
   ]
 }
 
-resource "kubernetes_manifest" "ascp" {
-  count    = length(local.manifest_split)
-  manifest = local.manifest_split[count.index]
+resource "helm_release" "ascp" {
+  name       = var.ascp_release_name
+  chart      = var.ascp_chart_name
+  repository = var.ascp_chart_repository
+  version    = var.ascp_chart_version
+  namespace  = var.ascp_chart_namespace
+
+  max_history = var.max_history
+  timeout     = var.chart_timeout
+
+  values = [
+    templatefile("${path.module}/templates/ascp.yaml", local.values),
+  ]
 }
