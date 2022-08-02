@@ -23,6 +23,8 @@ locals {
     syncSecretEnabled    = var.syncSecretEnabled
     enableSecretRotation = var.enableSecretRotation
   }
+
+  ascp_values = {}
 }
 
 resource "helm_release" "release" {
