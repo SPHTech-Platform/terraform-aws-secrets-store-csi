@@ -172,6 +172,18 @@ variable "tolerations" {
   default     = []
 }
 
+variable "pod_labels" {
+  description = "Labels for Secrets Store CSI Driver pods"
+  type        = map(any)
+  default     = {}
+}
+
+variable "pod_annotations" {
+  description = "Annotations for Secrets Store CSI Driver pods"
+  type        = map(any)
+  default     = {}
+}
+
 variable "syncSecretEnabled" {
   description = "Sync with kubernetes secrets"
   type        = bool

@@ -16,9 +16,11 @@ locals {
     resources_registrar = jsonencode(var.resources_registrar)
     resources_liveness  = jsonencode(var.resources_liveness)
 
-    affinity      = jsonencode(var.affinity)
-    node_selector = jsonencode(var.node_selector)
-    tolerations   = jsonencode(var.tolerations)
+    affinity        = jsonencode(var.affinity)
+    node_selector   = jsonencode(var.node_selector)
+    tolerations     = jsonencode(var.tolerations)
+    pod_labels      = jsonencode(var.pod_labels)
+    pod_annotations = jsonencode(var.pod_annotations)
 
     syncSecretEnabled    = var.syncSecretEnabled
     enableSecretRotation = var.enableSecretRotation
