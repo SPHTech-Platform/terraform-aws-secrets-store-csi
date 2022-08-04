@@ -72,7 +72,7 @@ variable "resources_driver" {
   default = {
     requests = {
       cpu    = "50m"
-      memory = "100Mi"
+      memory = "200Mi"
     }
     limits = {
       cpu    = "200m"
@@ -99,7 +99,7 @@ variable "resources_registrar" {
   default = {
     requests = {
       cpu    = "10m"
-      memory = "20Mi"
+      memory = "100Mi"
     }
     limits = {
       cpu    = "100m"
@@ -126,7 +126,7 @@ variable "resources_liveness" {
   default = {
     requests = {
       cpu    = "10m"
-      memory = "20Mi"
+      memory = "100Mi"
     }
     limits = {
       cpu    = "100m"
