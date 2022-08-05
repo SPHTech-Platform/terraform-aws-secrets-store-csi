@@ -71,7 +71,7 @@ variable "resources_driver" {
   type        = map(any)
   default = {
     requests = {
-      cpu    = "200m"
+      cpu    = "50m"
       memory = "200Mi"
     }
     limits = {
@@ -98,7 +98,7 @@ variable "resources_registrar" {
   type        = map(any)
   default = {
     requests = {
-      cpu    = "100m"
+      cpu    = "10m"
       memory = "100Mi"
     }
     limits = {
@@ -125,7 +125,7 @@ variable "resources_liveness" {
   type        = map(any)
   default = {
     requests = {
-      cpu    = "100m"
+      cpu    = "10m"
       memory = "100Mi"
     }
     limits = {
