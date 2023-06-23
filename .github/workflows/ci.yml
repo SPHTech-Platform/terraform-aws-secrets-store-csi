@@ -9,3 +9,4 @@ jobs:
     uses: SPHTech-Platform/reusable-workflows/.github/workflows/terraform.yaml@main
     with:
       upload_sarif: false
+    secrets: inherit
