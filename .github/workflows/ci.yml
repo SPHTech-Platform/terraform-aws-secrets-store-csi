@@ -10,3 +10,9 @@ jobs:
     with:
       upload_sarif: false
     secrets: inherit
+permissions:
+  actions: read
+  checks: read
+  contents: read
+  pull-requests: write
+  security-events: write
