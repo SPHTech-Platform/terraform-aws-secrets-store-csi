@@ -39,7 +39,13 @@ variable "chart_version" {
 variable "chart_namespace" {
   description = "Namespace to install the chart into"
   type        = string
-  default     = "kube-system"
+  default     = "secrets-store-csi-system"
+}
+
+variable "create_namespace" {
+  description = "Create the namespace if it does not exist"
+  type        = bool
+  default     = true
 }
 
 variable "chart_timeout" {
@@ -308,36 +314,6 @@ variable "oidc_provider_arn" {
 
 variable "iam_role_name" {
   description = "Name of IAM role for controller"
-  type        = string
-  default     = ""
-}
-
-variable "iam_role_description" {
-  description = "Description for IAM role for controller"
-  type        = string
-  default     = "Used by AWS Load Balancer Controller for EKS"
-}
-
-variable "iam_role_path" {
-  description = "IAM Role path for controller"
-  type        = string
-  default     = ""
-}
-
-variable "iam_role_permission_boundary" {
-  description = "Permission boundary ARN for IAM Role for controller"
-  type        = string
-  default     = ""
-}
-
-variable "iam_role_tags" {
-  description = "Tags for IAM Role for controller"
-  type        = map(string)
-  default     = {}
-}
-
-variable "iam_role_policy" {
-  description = "Override the IAM policy for the controller"
   type        = string
   default     = ""
 }
