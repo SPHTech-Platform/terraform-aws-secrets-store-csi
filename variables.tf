@@ -232,7 +232,7 @@ variable "ascp_chart_version" {
 variable "ascp_chart_namespace" {
   description = "Namespace to install the ASCP chart into"
   type        = string
-  default     = "kube-system"
+  default     = "secrets-store-csi-system"
 }
 
 variable "ascp_chart_timeout" {
@@ -301,7 +301,7 @@ variable "ascp_pod_annotations" {
 variable "ascp_priority_class_name" {
   description = "Priority class name for ASCP pods"
   type        = string
-  default     = ""
+  default     = "system-node-critical"
 }
 
 ########################
