@@ -295,7 +295,7 @@ variable "ascp_pod_annotations" {
 variable "ascp_priority_class_name" {
   description = "Priority class name for ASCP pods"
   type        = string
-  default     = ""
+  default     = "system-node-critical"
 }
 
 ########################
