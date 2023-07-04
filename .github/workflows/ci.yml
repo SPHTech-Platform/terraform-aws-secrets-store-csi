@@ -6,7 +6,7 @@ on:
       - main
 jobs:
   ci:
-    uses: SPHTech-Platform/reusable-workflows/.github/workflows/terraform.yaml@tflint-version
+    uses: SPHTech-Platform/reusable-workflows/.github/workflows/terraform.yaml@v2
     with:
       upload_sarif: false
     secrets: inherit
