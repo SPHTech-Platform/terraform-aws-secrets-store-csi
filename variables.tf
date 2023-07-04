@@ -57,13 +57,13 @@ variable "chart_timeout" {
 variable "image_repository" {
   description = "Image repository for the Driver"
   type        = string
-  default     = "k8s.gcr.io/csi-secrets-store/driver"
+  default     = "registry.k8s.io/csi-secrets-store/driver"
 }
 
 variable "image_repository_crds" {
   description = "Image repository for the CRDs"
   type        = string
-  default     = "k8s.gcr.io/csi-secrets-store/driver-crds"
+  default     = "registry.k8s.io/csi-secrets-store/driver-crds"
 }
 
 variable "image_tag" {
@@ -90,7 +90,7 @@ variable "resources_driver" {
 variable "image_repository_registrar" {
   description = "Image repository for the Registrar"
   type        = string
-  default     = "k8s.gcr.io/sig-storage/csi-node-driver-registrar"
+  default     = "registry.k8s.io/sig-storage/csi-node-driver-registrar"
 }
 
 variable "image_tag_registrar" {
@@ -117,7 +117,7 @@ variable "resources_registrar" {
 variable "image_repository_liveness" {
   description = "Image repository for the Liveness Probe"
   type        = string
-  default     = "k8s.gcr.io/sig-storage/livenessprobe"
+  default     = "registry.k8s.io/sig-storage/livenessprobe"
 }
 
 variable "image_tag_liveness" {
