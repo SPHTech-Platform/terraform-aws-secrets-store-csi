@@ -33,7 +33,7 @@ variable "chart_repository" {
 variable "chart_version" {
   description = "Version of Chart to install. Set to empty to install the latest version"
   type        = string
-  default     = "1.2.2"
+  default     = "1.4.3"
 }
 
 variable "chart_namespace" {
@@ -69,7 +69,7 @@ variable "image_repository_crds" {
 variable "image_tag" {
   description = "Image tag for the Driver and CRDs"
   type        = string
-  default     = "v1.2.2"
+  default     = "v1.4.3"
 }
 
 variable "resources_driver" {
@@ -96,7 +96,7 @@ variable "image_repository_registrar" {
 variable "image_tag_registrar" {
   description = "Image tag"
   type        = string
-  default     = "v2.5.1"
+  default     = "v2.10.0"
 }
 
 variable "resources_registrar" {
@@ -123,7 +123,7 @@ variable "image_repository_liveness" {
 variable "image_tag_liveness" {
   description = "Image tag fo the LivenessProbe"
   type        = string
-  default     = "v2.7.0"
+  default     = "v2.12.0"
 }
 
 variable "resources_liveness" {
@@ -220,13 +220,13 @@ variable "ascp_chart_name" {
 variable "ascp_chart_repository" {
   description = "Helm repository for the ASCP chart"
   type        = string
-  default     = "https://aws.github.io/eks-charts"
+  default     = "https://aws.github.io/secrets-store-csi-driver-provider-aws"
 }
 
 variable "ascp_chart_version" {
   description = "Version of ASCP chart to install. Set to empty to install the latest version"
   type        = string
-  default     = "0.0.3"
+  default     = "0.3.8"
 }
 
 variable "ascp_chart_namespace" {
@@ -256,7 +256,7 @@ variable "ascp_image_repository" {
 variable "ascp_image_tag" {
   description = "Image tag of the ASCP"
   type        = string
-  default     = "1.0.r2-6-gee95299-2022.04.14.21.07"
+  default     = "1.0.r2-68-gab548b3-2024.03.20.21.58"
 }
 
 variable "ascp_node_selector" {
