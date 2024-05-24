@@ -214,7 +214,7 @@ variable "ascp_release_name" {
 variable "ascp_chart_name" {
   description = "Name of ASCP chart"
   type        = string
-  default     = "csi-secrets-store-provider-aws"
+  default     = "secrets-store-csi-driver-provider-aws"
 }
 
 variable "ascp_chart_repository" {
