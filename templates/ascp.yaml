@@ -1,7 +1,6 @@
 imagePullSecrets: []
 
 image:
-  registry: ${image_registry}
   repository: ${image_repository}
   ## defaults to app.Version
   tag: ${image_tag}

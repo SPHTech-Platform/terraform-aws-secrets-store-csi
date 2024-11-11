@@ -27,7 +27,6 @@ locals {
   }
 
   ascp_values = {
-    image_registry   = var.ascp_image_registry
     image_repository = var.ascp_image_repository
     image_tag        = var.ascp_image_tag
 
