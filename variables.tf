@@ -33,7 +33,7 @@ variable "chart_repository" {
 variable "chart_version" {
   description = "Version of Chart to install. Set to empty to install the latest version"
   type        = string
-  default     = "1.4.3"
+  default     = "1.4.6"
 }
 
 variable "chart_namespace" {
@@ -69,7 +69,7 @@ variable "image_repository_crds" {
 variable "image_tag" {
   description = "Image tag for the Driver and CRDs"
   type        = string
-  default     = "v1.4.3"
+  default     = "v1.4.6"
 }
 
 variable "resources_driver" {
@@ -226,7 +226,7 @@ variable "ascp_chart_repository" {
 variable "ascp_chart_version" {
   description = "Version of ASCP chart to install. Set to empty to install the latest version"
   type        = string
-  default     = "0.3.8"
+  default     = "0.3.10"
 }
 
 variable "ascp_chart_namespace" {
@@ -241,22 +241,16 @@ variable "ascp_chart_timeout" {
   default     = 300
 }
 
-variable "ascp_image_registry" {
-  description = "Image registry of the ASCP"
-  type        = string
-  default     = "public.ecr.aws"
-}
-
 variable "ascp_image_repository" {
   description = "Image repository of the ASCP"
   type        = string
-  default     = "aws-secrets-manager/secrets-store-csi-driver-provider-aws"
+  default     = "public.ecr.aws/aws-secrets-manager/secrets-store-csi-driver-provider-aws"
 }
 
 variable "ascp_image_tag" {
   description = "Image tag of the ASCP"
   type        = string
-  default     = "1.0.r2-68-gab548b3-2024.03.20.21.58"
+  default     = "1.0.r2-75-g1f97be0-2024.10.17.19.45"
 }
 
 variable "ascp_node_selector" {
