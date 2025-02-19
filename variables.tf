@@ -33,7 +33,7 @@ variable "chart_repository" {
 variable "chart_version" {
   description = "Version of Chart to install. Set to empty to install the latest version"
   type        = string
-  default     = "1.4.6"
+  default     = "1.4.8"
 }
 
 variable "chart_namespace" {
@@ -69,7 +69,7 @@ variable "image_repository_crds" {
 variable "image_tag" {
   description = "Image tag for the Driver and CRDs"
   type        = string
-  default     = "v1.4.6"
+  default     = "v1.4.8"
 }
 
 variable "resources_driver" {
@@ -96,7 +96,7 @@ variable "image_repository_registrar" {
 variable "image_tag_registrar" {
   description = "Image tag"
   type        = string
-  default     = "v2.10.0"
+  default     = "v2.11.1"
 }
 
 variable "resources_registrar" {
@@ -123,7 +123,7 @@ variable "image_repository_liveness" {
 variable "image_tag_liveness" {
   description = "Image tag fo the LivenessProbe"
   type        = string
-  default     = "v2.12.0"
+  default     = "v2.13.1"
 }
 
 variable "resources_liveness" {
@@ -226,7 +226,7 @@ variable "ascp_chart_repository" {
 variable "ascp_chart_version" {
   description = "Version of ASCP chart to install. Set to empty to install the latest version"
   type        = string
-  default     = "0.3.10"
+  default     = "0.3.11"
 }
 
 variable "ascp_chart_namespace" {
@@ -250,7 +250,7 @@ variable "ascp_image_repository" {
 variable "ascp_image_tag" {
   description = "Image tag of the ASCP"
   type        = string
-  default     = "1.0.r2-75-g1f97be0-2024.10.17.19.45"
+  default     = "1.0.r2-80-g8244505-2025.02.10.18.44"
 }
 
 variable "ascp_node_selector" {
@@ -333,14 +333,31 @@ variable "external_secrets_secrets_manager_arns" {
   default     = ["arn:aws:secretsmanager:*:*:secret:*"]
 }
 
-variable "create_default_irsa" {
-  description = "Create default IRSA for service account"
-  type        = bool
-  default     = true
-}
-
 variable "namespace" {
   description = "Kubernetes namespace, where the service account want to create"
   type        = string
   default     = "default"
+}
+
+variable "iam_role_type" {
+  description = "IAM Roles for Service Accounts `irsa` or `pod_identity`"
+  type        = string
+  default     = "pod_identity"
+
+  validation {
+    condition     = contains(["irsa", "pod_identity"], var.iam_role_type)
+    error_message = "IAM Role type must be either `irsa` or `pod_identity`"
+  }
+}
+
+variable "external_secrets_kms_key_arns" {
+  description = "List of KMS Key ARNs that are used by Secrets Manager that contain secrets to mount using External Secrets"
+  type        = list(string)
+  default     = []
+}
+
+variable "external_secrets_create_permission" {
+  description = "Determines whether External Secrets has permission to create/delete secrets"
+  type        = bool
+  default     = false
 }
