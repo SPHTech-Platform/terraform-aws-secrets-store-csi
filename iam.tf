@@ -27,7 +27,8 @@ module "pod_identity" {
   source  = "terraform-aws-modules/eks-pod-identity/aws"
   version = "~> 2.0"
 
-  name = "${var.cluster_name}-secrets-manager-csi"
+  name        = coalesce(var.iam_role_name, "${var.cluster_name}-sm-csi")
+  description = "EKS Cluster ${var.cluster_name} Secret Manager CSI Driver Pod Identity Role"
 
   attach_external_secrets_policy        = true
   external_secrets_ssm_parameter_arns   = var.external_secrets_ssm_parameter_arns
