@@ -1,11 +1,11 @@
 module "secrets_manager_role" {
   count = var.iam_role_type == "irsa" ? 1 : 0
 
-  source  = "terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts-eks"
-  version = "~> 5.52"
+  source  = "terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts"
+  version = "~> 6.0"
 
-  role_name_prefix = coalesce(var.iam_role_name, "${var.cluster_name}-sm-csi-")
-  role_description = "EKS Cluster ${var.cluster_name} Secret Manager CSI Driver role"
+  name        = coalesce(var.iam_role_name, "${var.cluster_name}-sm-csi")
+  description = "EKS Cluster ${var.cluster_name} Secret Manager CSI Driver role"
 
   attach_external_secrets_policy                     = true
   external_secrets_ssm_parameter_arns                = var.external_secrets_ssm_parameter_arns
@@ -25,7 +25,7 @@ module "pod_identity" {
   count = var.iam_role_type == "pod_identity" ? 1 : 0
 
   source  = "terraform-aws-modules/eks-pod-identity/aws"
-  version = "~> 1.10"
+  version = "~> 2.0"
 
   name = "${var.cluster_name}-secrets-manager-csi"
 
@@ -39,4 +39,14 @@ module "pod_identity" {
     namespace       = var.namespace
     service_account = local.service_account_name
   }
+}
+
+moved {
+  from = module.secrets_manager_role[0].aws_iam_policy.external_secrets[0]
+  to   = module.secrets_manager_role[0].aws_iam_policy.this[0]
+}
+
+moved {
+  from = module.secrets_manager_role[0].aws_iam_role_policy_attachment.external_secrets[0]
+  to   = module.secrets_manager_role[0].aws_iam_role_policy_attachment.this[0]
 }
