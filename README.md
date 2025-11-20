@@ -5,21 +5,21 @@
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.0 |
-| <a name="requirement_helm"></a> [helm](#requirement\_helm) | >= 2.5 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.5 |
+| <a name="requirement_helm"></a> [helm](#requirement\_helm) | >= 3.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_helm"></a> [helm](#provider\_helm) | 2.17.0 |
+| <a name="provider_helm"></a> [helm](#provider\_helm) | 3.1.1 |
 
 ## Modules
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_pod_identity"></a> [pod\_identity](#module\_pod\_identity) | terraform-aws-modules/eks-pod-identity/aws | ~> 1.10 |
-| <a name="module_secrets_manager_role"></a> [secrets\_manager\_role](#module\_secrets\_manager\_role) | terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts-eks | ~> 5.52 |
+| <a name="module_pod_identity"></a> [pod\_identity](#module\_pod\_identity) | terraform-aws-modules/eks-pod-identity/aws | ~> 2.0 |
+| <a name="module_secrets_manager_role"></a> [secrets\_manager\_role](#module\_secrets\_manager\_role) | terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts | ~> 6.0 |
 
 ## Resources
 
@@ -37,9 +37,9 @@
 | <a name="input_ascp_chart_namespace"></a> [ascp\_chart\_namespace](#input\_ascp\_chart\_namespace) | Namespace to install the ASCP chart into | `string` | `"secrets-store-csi-system"` | no |
 | <a name="input_ascp_chart_repository"></a> [ascp\_chart\_repository](#input\_ascp\_chart\_repository) | Helm repository for the ASCP chart | `string` | `"https://aws.github.io/secrets-store-csi-driver-provider-aws"` | no |
 | <a name="input_ascp_chart_timeout"></a> [ascp\_chart\_timeout](#input\_ascp\_chart\_timeout) | Timeout to wait for the ASCP chart to be deployed. | `number` | `300` | no |
-| <a name="input_ascp_chart_version"></a> [ascp\_chart\_version](#input\_ascp\_chart\_version) | Version of ASCP chart to install. Set to empty to install the latest version | `string` | `"0.3.11"` | no |
+| <a name="input_ascp_chart_version"></a> [ascp\_chart\_version](#input\_ascp\_chart\_version) | Version of ASCP chart to install. Set to empty to install the latest version | `string` | `"2.1.1"` | no |
 | <a name="input_ascp_image_repository"></a> [ascp\_image\_repository](#input\_ascp\_image\_repository) | Image repository of the ASCP | `string` | `"public.ecr.aws/aws-secrets-manager/secrets-store-csi-driver-provider-aws"` | no |
-| <a name="input_ascp_image_tag"></a> [ascp\_image\_tag](#input\_ascp\_image\_tag) | Image tag of the ASCP | `string` | `"1.0.r2-80-g8244505-2025.02.10.18.44"` | no |
+| <a name="input_ascp_image_tag"></a> [ascp\_image\_tag](#input\_ascp\_image\_tag) | Image tag of the ASCP | `string` | `"2.1.0"` | no |
 | <a name="input_ascp_node_selector"></a> [ascp\_node\_selector](#input\_ascp\_node\_selector) | Node selector for ASCP pods | `map(any)` | `{}` | no |
 | <a name="input_ascp_pod_annotations"></a> [ascp\_pod\_annotations](#input\_ascp\_pod\_annotations) | Annotations for ASCP pods | `map(any)` | `{}` | no |
 | <a name="input_ascp_pod_labels"></a> [ascp\_pod\_labels](#input\_ascp\_pod\_labels) | Labels for ASCP pods | `map(any)` | `{}` | no |
@@ -51,7 +51,7 @@
 | <a name="input_chart_namespace"></a> [chart\_namespace](#input\_chart\_namespace) | Namespace to install the chart into | `string` | `"secrets-store-csi-system"` | no |
 | <a name="input_chart_repository"></a> [chart\_repository](#input\_chart\_repository) | Helm repository for the chart | `string` | `"https://kubernetes-sigs.github.io/secrets-store-csi-driver/charts"` | no |
 | <a name="input_chart_timeout"></a> [chart\_timeout](#input\_chart\_timeout) | Timeout to wait for the Chart to be deployed. | `number` | `300` | no |
-| <a name="input_chart_version"></a> [chart\_version](#input\_chart\_version) | Version of Chart to install. Set to empty to install the latest version | `string` | `"1.4.8"` | no |
+| <a name="input_chart_version"></a> [chart\_version](#input\_chart\_version) | Version of Chart to install. Set to empty to install the latest version | `string` | `"1.5.4"` | no |
 | <a name="input_cluster_name"></a> [cluster\_name](#input\_cluster\_name) | Name of Kubernetes Cluster | `string` | n/a | yes |
 | <a name="input_create_namespace"></a> [create\_namespace](#input\_create\_namespace) | Create the namespace if it does not exist | `bool` | `true` | no |
 | <a name="input_enableSecretRotation"></a> [enableSecretRotation](#input\_enableSecretRotation) | Enable rotation for secrets | `bool` | `false` | no |
@@ -65,9 +65,9 @@
 | <a name="input_image_repository_crds"></a> [image\_repository\_crds](#input\_image\_repository\_crds) | Image repository for the CRDs | `string` | `"registry.k8s.io/csi-secrets-store/driver-crds"` | no |
 | <a name="input_image_repository_liveness"></a> [image\_repository\_liveness](#input\_image\_repository\_liveness) | Image repository for the Liveness Probe | `string` | `"registry.k8s.io/sig-storage/livenessprobe"` | no |
 | <a name="input_image_repository_registrar"></a> [image\_repository\_registrar](#input\_image\_repository\_registrar) | Image repository for the Registrar | `string` | `"registry.k8s.io/sig-storage/csi-node-driver-registrar"` | no |
-| <a name="input_image_tag"></a> [image\_tag](#input\_image\_tag) | Image tag for the Driver and CRDs | `string` | `"v1.4.8"` | no |
-| <a name="input_image_tag_liveness"></a> [image\_tag\_liveness](#input\_image\_tag\_liveness) | Image tag fo the LivenessProbe | `string` | `"v2.13.1"` | no |
-| <a name="input_image_tag_registrar"></a> [image\_tag\_registrar](#input\_image\_tag\_registrar) | Image tag | `string` | `"v2.11.1"` | no |
+| <a name="input_image_tag"></a> [image\_tag](#input\_image\_tag) | Image tag for the Driver and CRDs | `string` | `"v1.5.4"` | no |
+| <a name="input_image_tag_liveness"></a> [image\_tag\_liveness](#input\_image\_tag\_liveness) | Image tag fo the LivenessProbe | `string` | `"v2.15.0"` | no |
+| <a name="input_image_tag_registrar"></a> [image\_tag\_registrar](#input\_image\_tag\_registrar) | Image tag | `string` | `"v2.13.0"` | no |
 | <a name="input_max_history"></a> [max\_history](#input\_max\_history) | Max History for Helm | `number` | `20` | no |
 | <a name="input_namespace"></a> [namespace](#input\_namespace) | Kubernetes namespace, where the service account want to create | `string` | `"default"` | no |
 | <a name="input_node_selector"></a> [node\_selector](#input\_node\_selector) | Node selector for Secrets Store CSI Driver pods | `map(any)` | `{}` | no |

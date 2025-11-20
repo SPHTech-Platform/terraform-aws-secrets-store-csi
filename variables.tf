@@ -33,7 +33,7 @@ variable "chart_repository" {
 variable "chart_version" {
   description = "Version of Chart to install. Set to empty to install the latest version"
   type        = string
-  default     = "1.4.8"
+  default     = "1.5.4"
 }
 
 variable "chart_namespace" {
@@ -69,7 +69,7 @@ variable "image_repository_crds" {
 variable "image_tag" {
   description = "Image tag for the Driver and CRDs"
   type        = string
-  default     = "v1.4.8"
+  default     = "v1.5.4"
 }
 
 variable "resources_driver" {
@@ -96,7 +96,7 @@ variable "image_repository_registrar" {
 variable "image_tag_registrar" {
   description = "Image tag"
   type        = string
-  default     = "v2.11.1"
+  default     = "v2.13.0"
 }
 
 variable "resources_registrar" {
@@ -123,7 +123,7 @@ variable "image_repository_liveness" {
 variable "image_tag_liveness" {
   description = "Image tag fo the LivenessProbe"
   type        = string
-  default     = "v2.13.1"
+  default     = "v2.15.0"
 }
 
 variable "resources_liveness" {
@@ -226,7 +226,7 @@ variable "ascp_chart_repository" {
 variable "ascp_chart_version" {
   description = "Version of ASCP chart to install. Set to empty to install the latest version"
   type        = string
-  default     = "0.3.11"
+  default     = "2.1.1"
 }
 
 variable "ascp_chart_namespace" {
@@ -250,7 +250,7 @@ variable "ascp_image_repository" {
 variable "ascp_image_tag" {
   description = "Image tag of the ASCP"
   type        = string
-  default     = "1.0.r2-80-g8244505-2025.02.10.18.44"
+  default     = "2.1.0"
 }
 
 variable "ascp_node_selector" {
